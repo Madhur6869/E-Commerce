@@ -1,5 +1,14 @@
 import {initializeApp} from 'firebase/app'
-import {getAuth,signInWithPopup,signInWithRedirect,GoogleAuthProvider,createUserWithEmailAndPassword,signInWithEmailAndPassword, signOut} from 'firebase/auth'
+import {
+    getAuth,
+    signInWithPopup,
+    signInWithRedirect,
+    GoogleAuthProvider,
+    createUserWithEmailAndPassword,
+    signInWithEmailAndPassword, 
+    signOut,
+    onAuthStateChanged
+} from 'firebase/auth'
 import {getFirestore, doc, getDoc, setDoc} from 'firebase/firestore'
 
 const firebaseConfig = {
@@ -13,6 +22,7 @@ const firebaseConfig = {
   
   // Initialize Firebase
   
+  // eslint-disable-next-line no-unused-vars
   const firebaseApp = initializeApp(firebaseConfig);
 
   const googleProvider = new GoogleAuthProvider();
@@ -64,3 +74,7 @@ export const signInAuthUserWithEmailAndPassword = async (email,password)=>{
 }
 
 export const signOutUser =async () => await signOut(auth)
+
+export const onAuthStateChangedListener = (callback)=>{
+    onAuthStateChanged(auth,callback)
+}
